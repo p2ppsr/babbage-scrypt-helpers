@@ -108,8 +108,8 @@ export const redeemContract = async (
                 outputsToRedeem: [
                     {
                         index: listResult.vout,
-                        unlockingScript: await listResult.contract
-                            .getUnlockingScript(redeemTransformer)
+                        unlockingScript: (await listResult.contract
+                            .getUnlockingScript(redeemTransformer))
                             .toHex(),
                     },
                 ],
