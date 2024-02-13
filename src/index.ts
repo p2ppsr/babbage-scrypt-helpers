@@ -99,6 +99,7 @@ export const redeemContract = async (
     redeemTransformer: (self: SmartContract) => void,
     description: string,
     customLockTime?: number,
+    customSequenceNumber = 0xffffffff,
     outputs?: CreateActionOutput[]
 ): Promise<CreateActionResult> => {
     return await createAction({
@@ -111,9 +112,10 @@ export const redeemContract = async (
                         unlockingScript: (await listResult.contract
                             .getUnlockingScript(redeemTransformer))
                             .toHex(),
-                    },
-                ],
-            },
+                        sequenceNumber: customSequenceNumber
+                    }
+                ]
+            }
         },
         description,
         lockTime: customLockTime,
