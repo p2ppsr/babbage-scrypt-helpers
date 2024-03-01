@@ -30,6 +30,7 @@ const verifyTruthy = <T>(v: T | null | undefined): T => {
  * @param {string} description - Description about what the action does.
  * @param {string} basket - Optional. The associated basket to use for the action.
  * @param {string} metadata - Optional. Custom metadata to be added to the customInstructions field of the output
+ * @param {boolean} acceptDelayedBroadcast - Optional. Defaults to false which ensures confirmed broadcast of new transaction.
  * @returns {Promise<CreateActionResult>} - Promise resolving the action result.
  */
 export const deployContract = async (
@@ -37,12 +38,14 @@ export const deployContract = async (
     satoshis: number,
     description: string,
     basket?: string,
-    metadata?: string
+    metadata?: string,
+    acceptDelayedBroadcast = false
 ): Promise<CreateActionResult> => {
     return await createAction({
         description,
         outputs: [
             {
+                acceptDelayedBroadcast,
                 script: instance.lockingScript.toHex(),
                 satoshis,
                 basket,
