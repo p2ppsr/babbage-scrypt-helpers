@@ -45,13 +45,13 @@ export const deployContract = async (
         description,
         outputs: [
             {
-                acceptDelayedBroadcast,
                 script: instance.lockingScript.toHex(),
                 satoshis,
                 basket,
                 customInstructions: metadata,
             },
         ],
+        acceptDelayedBroadcast
     })
 }
 
