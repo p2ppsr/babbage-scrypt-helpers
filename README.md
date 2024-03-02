@@ -65,7 +65,7 @@ Links: [API](#api), [Variables](#variables)
 #### Variable: deployContract
 
 ```ts
-deployContract = async (instance: SmartContract, satoshis: number, description: string, basket?: string, metadata?: string): Promise<CreateActionResult> => {
+deployContract = async (instance: SmartContract, satoshis: number, description: string, basket?: string, metadata?: string, acceptDelayedBroadcast = false): Promise<CreateActionResult> => {
     return await createAction({
         description,
         outputs: [
@@ -76,6 +76,7 @@ deployContract = async (instance: SmartContract, satoshis: number, description: 
                 customInstructions: metadata,
             },
         ],
+        acceptDelayedBroadcast
     });
 }
 ```
@@ -110,7 +111,7 @@ Links: [API](#api), [Variables](#variables)
 #### Variable: redeemContract
 
 ```ts
-redeemContract = async (listResult: ListResult<SmartContract>, redeemTransformer: (self: SmartContract) => void, description: string, customLockTime?: number, outputs?: CreateActionOutput[]): Promise<CreateActionResult> => {
+redeemContract = async (listResult: ListResult<SmartContract>, redeemTransformer: (self: SmartContract) => void, description: string, customLockTime?: number, customSequenceNumber = 4294967295, outputs?: CreateActionOutput[]): Promise<CreateActionResult> => {
     return await createAction({
         inputs: {
             [listResult.txid]: {
@@ -118,12 +119,13 @@ redeemContract = async (listResult: ListResult<SmartContract>, redeemTransformer
                 outputsToRedeem: [
                     {
                         index: listResult.vout,
-                        unlockingScript: await listResult.contract
-                            .getUnlockingScript(redeemTransformer)
+                        unlockingScript: (await listResult.contract
+                            .getUnlockingScript(redeemTransformer))
                             .toHex(),
-                    },
-                ],
-            },
+                        sequenceNumber: customSequenceNumber
+                    }
+                ]
+            }
         },
         description,
         lockTime: customLockTime,
