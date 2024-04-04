@@ -1,6 +1,6 @@
 {
   "name": "babbage-scrypt-helpers",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Tools for deploying sCrypt contracts with Babbage SDK",
   "main": "./out/src/index.js",
   "types": "./out/src/index.d.ts",
