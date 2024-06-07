@@ -48,7 +48,7 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "@babbage/sdk-ts": "^0.2.36",
+    "@babbage/sdk-ts": "^0.2.37",
     "scrypt-ts": "^1.3.25"
   }
 }
