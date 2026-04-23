@@ -1,6 +1,8 @@
 # babbage-scrypt-helpers
 
-Tools for deploying sCrypt contracts with Babbage SDK
+> **Status:** Historical helper package for the deprecated `@babbage/sdk-ts` stack. New BSV applications should prefer `@bsv/sdk`, BRC-100 `WalletClient` flows, and current wallet implementations.
+
+Tools for deploying sCrypt contracts with the older Babbage SDK stack.
 
 The code is hosted [on GitHub](https://github.com/p2ppsr/babbage-scrypt-helpers) and the package is available [through NPM](https://www.npmjs.com/package/babbage-scrypt-helpers).
 
